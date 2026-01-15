@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Interview - InterviewPulse{% endblock %}
+
+{% block extra_css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/interviews/add_interview.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <div class="form-header">
+        <h1>➕ Add New Interview</h1>
+        <p>Keep track of your upcoming interview</p>
+    </div>
+
+    <form method="POST" action="/interviews/add" id="interviewForm">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label class="form-label" for="username">Your Username</label>
+            <div class="icon-input">
+                <span class="input-icon">👤</span>
+                <input 
+                    type="text" 
+                    id="username" 
+                    name="username" 
+                    class="form-input" 
+                    placeholder="Enter your username"
+                    value="{{ user.username }}"
+                    required
+                >
+            </div>
+            <div class="form-help">Your registered username</div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" for="company">Company Name</label>
+            <div class="icon-input">
+                <span class="input-icon">🏢</span>
+                <input 
+                    type="text" 
+                    id="company" 
+                    name="company" 
+                    class="form-input" 
+                    placeholder="e.g., Google, Microsoft, Amazon"
+                    required
+                    maxlength="255"
+                >
+            </div>
+            <div class="form-help">The company you're interviewing with</div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" for="role">Job Role</label>
+            <div class="icon-input">
+                <span class="input-icon">💼</span>
+                <input 
+                    type="text" 
+                    id="role" 
+                    name="role" 
+                    class="form-input" 
+                    placeholder="e.g., Software Engineer, Data Scientist"
+                    required
+                    maxlength="255"
+                >
+            </div>
+            <div class="form-help">The position you're applying for</div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" for="date">Interview Date</label>
+            <div class="icon-input">
+                <span class="input-icon">📅</span>
+                <input 
+                    type="date" 
+                    id="date" 
+                    name="date" 
+                    class="form-input" 
+                    required
+                    min="{{ today }}"
+                >
+            </div>
+            <div class="form-help">When is your interview scheduled?</div>
+        </div>
+
+        <div class="form-actions">
+            <a href="/interviews/list" class="btn btn-cancel">Cancel</a>
+            <button type="submit" class="btn btn-primary">✅ Add Interview</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Set minimum date to today
+    document.getElementById('date').setAttribute('min', new Date().toISOString().split('T')[0]);
+
+    // Form validation
+    document.getElementById('interviewForm').addEventListener('submit', function(e) {
+        const company = document.getElementById('company').value.trim();
+        const role = document.getElementById('role').value.trim();
+        const date = document.getElementById('date').value;
+
+        if (!company || !role || !date) {
+            e.preventDefault();
+            alert('Please fill in all required fields');
+            return false;
+        }
+    });
+</script>
+{% endblock %}

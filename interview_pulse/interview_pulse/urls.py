@@ -16,10 +16,24 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.shortcuts import render
+from interviews.models import Interview
+from datetime import date
+
+def home(request):
+    """Home page view"""
+    context = {}
+    if request.user.is_authenticated:
+        interviews = Interview.objects.filter(user=request.user)
+        context['total_interviews'] = interviews.count()
+        context['upcoming_interviews'] = interviews.filter(date__gte=date.today()).count()
+        context['companies_count'] = interviews.values('company').distinct().count()
+    return render(request, 'home.html', context)
 
 urlpatterns = [
-    path('users/', include('users.urls')),
+    path('', home, name='home'),
     path('interviews/', include('interviews.urls')),
     path('preparation/', include('preparation.urls')),
+    path('users/', include('users.urls')),
     path('admin/', admin.site.urls),
 ]

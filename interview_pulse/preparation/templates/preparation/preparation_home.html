@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% block title %}Interview Preparation - InterviewPulse{% endblock %}
+
+{% block extra_css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/preparation/preparation.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="prep-header">
+    <h1>🎓 Interview Preparation</h1>
+    <p>Everything you need to ace your interviews</p>
+</div>
+
+<div class="categories-grid">
+    <div class="category-card" onclick="location.href='/preparation/technical'">
+        <div class="category-icon">💻</div>
+        <div class="category-title">Technical Questions</div>
+        <div class="category-description">
+            Practice coding problems, algorithms, and data structures
+        </div>
+        <div class="category-count">150+ Questions</div>
+    </div>
+
+    <div class="category-card" onclick="location.href='/preparation/behavioral'">
+        <div class="category-icon">💬</div>
+        <div class="category-title">Behavioral Questions</div>
+        <div class="category-description">
+            Common behavioral questions and STAR method examples
+        </div>
+        <div class="category-count">80+ Questions</div>
+    </div>
+
+    <div class="category-card" onclick="location.href='/preparation/system-design'">
+        <div class="category-icon">🏗️</div>
+        <div class="category-title">System Design</div>
+        <div class="category-description">
+            Learn to design scalable systems and architectures
+        </div>
+        <div class="category-count">30+ Topics</div>
+    </div>
+
+    <div class="category-card" onclick="location.href='/preparation/company-specific'">
+        <div class="category-icon">🏢</div>
+        <div class="category-title">Company-Specific</div>
+        <div class="category-description">
+            Interview experiences and tips for top companies
+        </div>
+        <div class="category-count">50+ Companies</div>
+    </div>
+</div>
+
+<div class="resources-section">
+    <h2>📚 Recommended Resources</h2>
+    <div class="resources-list">
+        <div class="resource-item">
+            <div class="resource-info">
+                <h3>Cracking the Coding Interview</h3>
+                <p>Essential book for technical interview preparation</p>
+            </div>
+            <a href="#" class="btn btn-primary">View</a>
+        </div>
+        <div class="resource-item">
+            <div class="resource-info">
+                <h3>LeetCode Practice</h3>
+                <p>Platform for coding practice with 2000+ problems</p>
+            </div>
+            <a href="#" class="btn btn-primary">Visit</a>
+        </div>
+        <div class="resource-item">
+            <div class="resource-info">
+                <h3>Mock Interview Sessions</h3>
+                <p>Practice with peers and get real-time feedback</p>
+            </div>
+            <a href="#" class="btn btn-primary">Schedule</a>
+        </div>
+    </div>
+</div>
+
+<div class="tips-section">
+    <h2>💡 Quick Tips for Success</h2>
+    <div class="tips-grid">
+        <div class="tip-card">
+            <h3>1. Practice Daily</h3>
+            <p>Consistency is key. Solve at least 1-2 problems every day.</p>
+        </div>
+        <div class="tip-card">
+            <h3>2. Research Company</h3>
+            <p>Learn about the company culture, values, and recent news.</p>
+        </div>
+        <div class="tip-card">
+            <h3>3. Prepare Questions</h3>
+            <p>Always have thoughtful questions ready for the interviewer.</p>
+        </div>
+        <div class="tip-card">
+            <h3>4. Mock Interviews</h3>
+            <p>Practice with friends or use online platforms for feedback.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

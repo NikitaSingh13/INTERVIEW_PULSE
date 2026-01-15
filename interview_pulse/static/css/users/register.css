@@ -1,0 +1,139 @@
+/* Register Page Styles - InterviewPulse */
+
+.auth-container {
+    max-width: 480px;
+    margin: 3rem auto;
+    animation: containerZoom 0.6s ease-out;
+}
+
+@keyframes containerZoom {
+    from {
+        opacity: 0;
+        transform: scale(0.9) rotateY(10deg);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) rotateY(0);
+    }
+}
+
+.auth-card {
+    background: white;
+    padding: 3rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    border: 1px solid #E5E7EB;
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.auth-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.auth-header h1 {
+    font-size: 2rem;
+    color: #1F2937;
+    margin-bottom: 0.75rem;
+    font-weight: 700;
+}
+
+.auth-header p {
+    color: #6B7280;
+    font-size: 1rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #374151;
+    font-size: 0.9375rem;
+}
+
+.form-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid #E5E7EB;
+    border-radius: 8px;
+    font-size: 0.9375rem;
+    transition: all 0.2s;
+    background: white;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #059669;
+    box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+}
+
+.form-actions {
+    margin-top: 2rem;
+}
+
+.form-actions .btn {
+    width: 100%;
+    padding: 0.875rem;
+    font-size: 1rem;
+}
+
+.auth-footer {
+    text-align: center;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #E5E7EB;
+    color: #6B7280;
+    font-size: 0.9375rem;
+}
+
+.auth-footer a {
+    color: #059669;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.auth-footer a:hover {
+    text-decoration: underline;
+}
+
+.password-strength {
+    height: 4px;
+    background: #E5E7EB;
+    border-radius: 4px;
+    margin-top: 0.5rem;
+    overflow: hidden;
+}
+
+.password-strength-bar {
+    height: 100%;
+    width: 0;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: strengthPulse 1s ease-in-out infinite;
+}
+
+@keyframes strengthPulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+.strength-weak { width: 33%; background: #DC2626; }
+.strength-medium { width: 66%; background: #F59E0B; }
+.strength-strong { width: 100%; background: #059669; }
+
+.form-help {
+    font-size: 0.875rem;
+    color: #6B7280;
+    margin-top: 0.375rem;
+}

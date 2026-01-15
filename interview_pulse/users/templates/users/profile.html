@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title %}My Profile - InterviewPulse{% endblock %}
+
+{% block extra_css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/users/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+    <div class="profile-header">
+        <div class="profile-avatar">👤</div>
+        <div class="profile-name">{{ user.username }}</div>
+        <div class="profile-email">{{ user.email }}</div>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-number">{{ total_interviews|default:"0" }}</div>
+            <div class="stat-label">Total Interviews</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">{{ upcoming_interviews|default:"0" }}</div>
+            <div class="stat-label">Upcoming</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">{{ companies_count|default:"0" }}</div>
+            <div class="stat-label">Companies</div>
+        </div>
+    </div>
+
+    <div class="profile-section">
+        <div class="section-title">
+            📊 Account Information
+        </div>
+        <div class="info-grid">
+            <div class="info-item">
+                <span class="info-label">Username</span>
+                <span class="info-value">{{ user.username }}</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Email</span>
+                <span class="info-value">{{ user.email }}</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Member Since</span>
+                <span class="info-value">{{ user.date_joined|date:"F d, Y" }}</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Last Login</span>
+                <span class="info-value">{{ user.last_login|date:"F d, Y H:i" }}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="profile-section">
+        <div class="section-title">
+            🎯 Recent Activity
+        </div>
+        <div class="info-grid">
+            {% if recent_interviews %}
+                {% for interview in recent_interviews %}
+                <div class="info-item">
+                    <span class="info-label">{{ interview.company }}</span>
+                    <span class="info-value">{{ interview.date }}</span>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p style="text-align: center; color: #666; padding: 2rem;">
+                    No recent activity to display
+                </p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="action-buttons">
+        <a href="/users/edit-profile" class="btn btn-primary">✏️ Edit Profile</a>
+        <a href="/users/change-password" class="btn btn-secondary">🔒 Change Password</a>
+    </div>
+</div>
+{% endblock %}

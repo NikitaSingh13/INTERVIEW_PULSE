@@ -3,5 +3,5 @@ from django.http import HttpResponse
 
 # Create your views here.
 
-def preparation(request):
-    return HttpResponse("preparation page")
+def preparation_home(request):
+    return render(request, 'preparation/preparation_home.html')

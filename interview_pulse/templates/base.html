@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}InterviewPulse - Track Your Interviews{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">💼 InterviewPulse</div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/interviews/list">Interviews</a></li>
+                <li><a href="/preparation/">Prepare</a></li>
+            </ul>
+            <div class="nav-actions">
+                {% if user.is_authenticated %}
+                    <span style="margin-right: 1rem; color: #6B7280; font-weight: 500;">👤 {{ user.username }}</span>
+                    <a href="/interviews/add" class="btn btn-primary">Add Interview</a>
+                    <a href="/users/logout" class="btn btn-secondary">Logout</a>
+                {% else %}
+                    <a href="/users/login" class="btn btn-secondary">Login</a>
+                    <a href="/users/register" class="btn btn-primary">Get Started</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <!-- Messages -->
+    {% if messages %}
+    <div class="container">
+        <ul class="messages">
+            {% for message in messages %}
+                <li class="alert alert-{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="content-wrapper">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 InterviewPulse. Your Career Success Partner 💼</p>
+    </footer>
+
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block title %}My Interviews - InterviewPulse{% endblock %}
+
+{% block extra_css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/interviews/interview_list.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>📋 My Interviews</h1>
+    <a href="/interviews/add" class="btn btn-primary">➕ Add New Interview</a>
+</div>
+
+<div class="filter-section">
+    <div class="filter-group">
+        <input type="text" id="searchCompany" class="filter-input" placeholder="🔍 Search by company...">
+        <input type="text" id="searchRole" class="filter-input" placeholder="🔍 Search by role...">
+        <input type="date" id="filterDate" class="filter-input">
+    </div>
+</div>
+
+<div class="interviews-grid" id="interviewsList">
+    {% if interviews %}
+        {% for interview in interviews %}
+        <div class="interview-card" data-company="{{ interview.company }}" data-role="{{ interview.role }}" data-date="{{ interview.date }}">
+            <div class="interview-header">
+                <div>
+                    <div class="company-name">🏢 {{ interview.company }}</div>
+                    <div class="role-name">{{ interview.role }}</div>
+                </div>
+                <div class="interview-date">📅 {{ interview.date }}</div>
+            </div>
+            <div class="interview-meta">
+                <div class="meta-item">
+                    <span>👤</span>
+                    <span>{{ interview.user.username }}</span>
+                </div>
+                <div class="meta-item">
+                    {% if interview.date >= today %}
+                        <span class="status-badge status-upcoming">Upcoming</span>
+                    {% else %}
+                        <span class="status-badge status-past">Completed</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="empty-state">
+            <div class="empty-state-icon">📭</div>
+            <h2>No interviews scheduled yet</h2>
+            <p>Start tracking your interviews by adding your first one!</p>
+            <a href="/interviews/add" class="btn btn-primary" style="margin-top: 1rem;">Add Your First Interview</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Simple client-side filtering
+    document.getElementById('searchCompany').addEventListener('input', filterInterviews);
+    document.getElementById('searchRole').addEventListener('input', filterInterviews);
+    document.getElementById('filterDate').addEventListener('change', filterInterviews);
+
+    function filterInterviews() {
+        const companySearch = document.getElementById('searchCompany').value.toLowerCase();
+        const roleSearch = document.getElementById('searchRole').value.toLowerCase();
+        const dateFilter = document.getElementById('filterDate').value;
+
+        const cards = document.querySelectorAll('.interview-card');
+        
+        cards.forEach(card => {
+            const company = card.dataset.company.toLowerCase();
+            const role = card.dataset.role.toLowerCase();
+            const date = card.dataset.date;
+
+            const matchesCompany = company.includes(companySearch);
+            const matchesRole = role.includes(roleSearch);
+            const matchesDate = !dateFilter || date === dateFilter;
+
+            if (matchesCompany && matchesRole && matchesDate) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+</script>
+{% endblock %}
